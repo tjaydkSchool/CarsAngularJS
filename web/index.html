@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--BOOTSTRAP-->
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!--ANGULARJS-->
+        <script src="js/angular.min.js" type="text/javascript"></script>
+    </head>
+    <body data-ng-app="myApp">
+        <div data-ng-controller="myController as ctrl">
+        
+        <input type="text" data-ng-model="input" placeholder="Indtast tekst her"/>
+        <hr>
+        <h2 data-ng-bind="input"></h2>
+        <p>{{ctrl.message}}</p>
+        
+        
+        
+        </div>
+        
+        <!--ANGULAR JS APPLICATION-->
+        <script>
+            var myApp = angular.module("myApp", []);
+            
+            myApp.controller("myController", [function(){
+//                    PLACE YOUR CODE HERE
+                    var self = this;
+                    self.message = "Hello world";
+            }]);
+        </script>
+    </body>
+</html>

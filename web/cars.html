@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html data-ng-app="DemoApp" data-ng-controller="CarController as ctrl">
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title data-ng-bind="ctrl.title"></title>
+        <!--BOOTSTEAP-->
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!--ANGULARJS-->
+        <script src="js/angular.min.js" type="text/javascript"></script>
+        <script src="https://code.angularjs.org/1.2.26/i18n/angular-locale_da-dk.js" type="text/javascript"></script>
+
+        <style type="text/css">
+            .sortorder:after {
+                content: '\25b2';
+            }
+            .sortorder.reverse:after {
+                content: '\25bc';
+            }
+        </style>
+
+    </head>
+    <body>
+        <div>
+            <h1 data-ng-bind="ctrl.title"></h1>
+            <h2>Number of cars: {{ ctrl.cars.length}}</h2>
+
+            <input type="search" data-ng-model='searchText' placeholder="Filter searchword"/>
+
+            <table class="table">
+                <thead>
+                <td></td>
+                <td><a href='' data-ng-click="predicate = 'year'; reverse=!reverse"><strong>Year</strong></a></td>
+                <td><a href='' data-ng-click="predicate = 'registered'; reverse=!reverse"><strong>Register</strong></a></td>
+                <td><a href='' data-ng-click="predicate = 'make'; reverse=!reverse"><strong>Make</strong></a></td>
+                <td><a href='' data-ng-click="predicate = 'model'; reverse=!reverse"><strong>Model</strong></a></td>
+                <td><a href='' data-ng-click="predicate = 'description'; reverse=!reverse"><strong>Description</strong></a></td>
+                <td><a href='' data-ng-click="predicate = 'price'; reverse=!reverse"><strong>Price</strong></a></td>
+                </thead>
+                <tr data-ng-repeat="cars in ctrl.cars | filter:searchText | orderBy:predicate:reverse" class='ng-scope'>
+                    <td>{{ $index + 1}}</td>
+                    <td>{{ cars.year}}</td>
+                    <td>{{ cars.registered | date}}</td>
+                    <td>{{ cars.make}}</td>
+                    <td>{{ cars.model}}</td>
+                    <td>{{ cars.description}}</td>
+                    <td>{{ cars.price | currency}}</td>
+                </tr>
+            </table>
+
+        </div>
+        <script>
+            var myApp = angular.module('DemoApp', []);
+                    myApp.controller('CarController', ['$scope', function ($scope) {
+                    var self = this;
+                            self.cars = [
+                            {year: 1997, registered: 867621600000, make: 'Ford', model: 'E350', description: 'ac, abs, moon', price: 3000}
+                            , {year: 1999, registered: 945212400000, make: 'Chevy', model: 'Venture', description: 'None', price: 4900}
+                            , {year: 2000, registered: 953766000000, make: 'Chevy', model: 'Venture', description: '', price: 5000}
+                            , {year: 1996, registered: 844380000000, make: 'Jeep', model: 'Grand Cherokee', description: 'Air, moon roof, loaded', price: 4799 }
+                            ];
+                            self.title = "Cars Demo App";
+                            $scope.predicate = 'make';
+//                            self.reverse = true;
+//                            self.order = function(predicate) {
+//                            self.reverse = (self.predicate === predicate) ? !self.predicate : false;
+//                                    self.predicate = predicate;
+//                            };
+                    }]);</script>
+    </body>
+</html>
